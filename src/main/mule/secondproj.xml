@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="2f127c93-d26e-4e2b-934b-66e0babb9c8a" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="02d7599d-ad91-4c84-8367-06e3a45f8b4d" >
+		<http:request-connection host="first-app1525.us-e2.cloudhub.io" />
+	</http:request-config>
+	<flow name="secondprojFlow" doc:id="62362b4d-5c8e-42fc-a61f-680a24202181" >
+		<http:listener doc:name="Listener" doc:id="d580c58a-e849-4adf-9367-01898b1640ee" config-ref="HTTP_Listener_config" path="/processhello"/>
+		<http:request method="GET" doc:name="Request" doc:id="b971ab1e-0992-4bc4-983a-fb0209a51575" config-ref="HTTP_Request_configuration" path="/helloworld"/>
+		<logger level="INFO" doc:name="Logger" doc:id="76e966a5-9aff-4ad9-9880-42e9f0fdf9bb" message="#[payload]"/>
+	</flow>
+</mule>
